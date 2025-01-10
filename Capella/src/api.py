@@ -2,12 +2,12 @@ from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 from typing import List, Dict, Any
 import time
-from .langchain_manager import LangChainManager
+from .couchbase_manager import CouchbaseManager
 
-app = FastAPI(title="Vector Search API")
+app = FastAPI(title="Couchbase Vector Search Demo")
 
-# Initialize LangChain manager
-manager = LangChainManager()
+# Initialize Couchbase manager
+manager = CouchbaseManager()
 
 class SearchRequest(BaseModel):
     query: str
@@ -17,15 +17,13 @@ class SearchResponse(BaseModel):
     results: List[Dict[str, Any]]
     metrics: Dict[str, Any]
 
-@app.post("/search/semantic", response_model=SearchResponse)
-async def semantic_search(request: SearchRequest):
+@app.post("/search/vector", response_model=SearchResponse)
+async def vector_search(request: SearchRequest):
     try:
         start_time = time.time()
         
         # Perform search
-        search_start = time.time()
-        results = manager.semantic_search(request.query, k=request.limit)
-        search_time = time.time() - search_start
+        results, search_time = manager.vector_search(request.query, request.limit)
         
         total_time = time.time() - start_time
         

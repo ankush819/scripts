@@ -6,12 +6,22 @@ load_dotenv()
 # Zilliz Configuration
 ZILLIZ_URI = os.getenv("ZILLIZ_URI")
 ZILLIZ_TOKEN = os.getenv("ZILLIZ_TOKEN")
-COLLECTION_NAME = "news_articles"
+COLLECTION_NAME = "news_articles_enhanced"
+
+# Google API Configuration
+GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")
 
 # Vector DB Configuration
-VECTOR_DIM = 384
-MODEL_NAME = 'sentence-transformers/all-MiniLM-L6-v2'
-BATCH_SIZE = 128
+TITLE_VECTOR_DIM = 384  # all-MiniLM-L6-v2
+CONTENT_VECTOR_DIM = 768  # mpnet-base
+SUMMARY_VECTOR_DIM = 1024  # e5-large
+
+# Models Configuration
+TITLE_MODEL = 'sentence-transformers/all-MiniLM-L6-v2'
+CONTENT_MODEL = 'sentence-transformers/all-mpnet-base-v2'
+SUMMARY_MODEL = 'intfloat/e5-large'
+
+BATCH_SIZE = 64
 
 # Index Configuration
 INDEX_PARAMS = {
@@ -27,5 +37,6 @@ SEARCH_PARAMS = {
 
 # Dataset Configuration
 DATASET_NAME = "ag_news"
-NUM_SAMPLES = 10000  # Reduced from 100000 to avoid memory issues
-INSERT_BATCH_SIZE = 1000  # Number of records to insert at once 
+NUM_SAMPLES = 100  # Total samples to process
+INSERT_BATCH_SIZE = 100  # Number of records to insert at once
+LLM_BATCH_SIZE = 100  # Increased from 10 to 100 documents per LLM call 

@@ -8,4 +8,8 @@ datasets
 tqdm
 streamlit
 pandas
-requests 
+requests
+google-generativeai
+langchain-google-genai
+langchain-community
+langchain

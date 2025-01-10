@@ -1,0 +1,11 @@
+python-dotenv
+couchbase
+sentence-transformers
+numpy
+fastapi
+uvicorn
+datasets
+tqdm
+streamlit
+pandas
+requests 
